@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Join Appointment</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.css">
+</head>
+
+<body>
+  <div class="ui huge inverted menu">
+    <div class="header item">
+      <i class="ui icon handshake"></i>Specialist on Demand
+    </div>
+    <div class="right menu">
+      <a class="item" href="/">
+        Book an appointment
+      </a>
+      <a class="item" onClick="app.showAboutModal()">
+        About
+      </a>
+    </div>
+  </div>
+  <div class="ui raised very padded text container segment center aligned" id="join-appointment-app">
+
+    <h1>Join Appointment</h1>
+
+    <form class="ui form" name="request-otp" v-if="!isOtpRequested()">
+
+
+
+      <div class="field">
+        <button type="button" v-on:click="request" class="ui secondary button big">Request Code</button>
+      </div>
+      <div class="field">
+        <p>We will send you an access code to the phone number you registered with. </p>
+      </div>
+
+
+
+    </form>
+
+    <form class="ui form" name="validate-otp" v-if="isOtpRequested()">
+
+      <h4>Enter appointment code</h4>
+      <div class="field">
+
+
+        <input type="text" title="The code has 5 digits" pattern=".{5}" id="otp" v-model="otp" style="font-size:1.75rem; text-align:center;">
+      </div>
+      <div class="field">
+
+
+        <button type="button" v-on:click="validate" class="ui green button big">Join Appointment!</button>
+
+
+      </div>
+
+    </form>
+    <div v-if="isError" class="ui icon error message">
+      <li class="warning icon"></li>
+      <div class="content">
+        <div class="header">That's not the right code!</div>
+        <p>Try again</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui modal">
+    <div class="header">About this App</div>
+    <div class="content">
+      <p>A super awesome specialist video conference solution</p>
+      <p>Brought to you by the EMEA SE Team!</p>
+
+    </div>
+    <div class="actions">
+      <div class="ui cancel button">
+        <i class="close icon"></i>Close</div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></script>
+  <script src="/join.js"></script>
+</body>
+
+</html>

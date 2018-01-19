@@ -1,0 +1,38 @@
+{
+  "name": "twilio-video-specialist-on-demand",
+  "description": "This application is functional customer-to-specialist demo platform. It utilizes Twilio SMS and Video.",
+  "version": "1.0.0",
+  "author": "Ameer Badri, Matthias Damm, Stuart Logan, Abhijit Mehta",
+  "repository": "https://github.com/nash-md/twilio-video-specialist-on-demand",
+  "main": "server/server.js",
+  "engines": {
+    "node": "^6.5"
+  },
+  "scripts": {
+    "start": "node .",
+    "posttest": "npm run lint && nsp check"
+  },
+  "dependencies": {
+    "authy-client": "^1.0.x",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^4.0.0",
+    "helmet": "^1.3.0",
+    "http": "0.0.0",
+    "loopback": "^3.0.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^5.0.0",
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^2.0.0",
+    "twilio": "^3.9.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0",
+    "nsp": "^2.1.0"
+  },
+  "license": "MIT"
+}

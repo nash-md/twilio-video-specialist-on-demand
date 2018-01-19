@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Create Appointment</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.css">
+
+</head>
+
+<body>
+  <div class="ui huge inverted menu">
+    <div class="header item">
+      <i class="ui icon handshake"></i>Specialist on Demand
+    </div>
+    <div class="right menu">
+      <a class="item" href="/">
+        Book an appointment
+      </a>
+      <a class="item" onClick="app.showAboutModal()">
+        About
+      </a>
+    </div>
+  </div>
+  <div class="ui raised very padded text container segment" id="create-appointment-app">
+
+    <h1>Create Appointment</h1>
+
+    <form class="ui form" name="appointment" v-on:submit.prevent>
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="title" v-model="title">
+        <small class="form-text text-muted">Please add the name of your appointment</small>
+      </div>
+
+      <div v-for="(participant, index) in meetingParticipants" class="ui segment">
+        <div class="ui top attached segment clearing">
+          <h3 class="ui header left floated">Enter Participant {{ index + 1 }} details</h3>
+          <button class="ui basic button right floated" v-on:click="removeParticipant(index)">
+            <i class="remove user icon"></i> Remove
+          </button>
+        </div>
+        <div class="ui bottom attached segment">
+          <div class="equal width fields">
+            <div class="field" :class="{  'error': errors.has('Participant ' + (index+1) + ' Name')}">
+
+              <label>Participant Name</label>
+              <input type="text" :id="index" v-model="participant.name" :name="'Participant ' + (index+1) + ' Name'" v-validate="'required'">
+
+            </div>
+            <div class="field" :class="{ 'error': errors.has('Participant ' + (index+1) + ' Number')}">
+              <label>Participant Number</label>
+              <input minlength="10" maxlength="15" type="text" class="form-control" placeholder="+44747747747747" v-model="participant.phoneNumber"
+                :name="'Participant ' + (index+1) + ' Number'" v-validate="{ required: true, regex: /^[\\+][1-9][0-9]{1,14}$/ }">
+
+            </div>
+
+            <div class="field" :class="{ 'error': errors.has('Participant ' + (index+1) + ' Role')}">
+              <label>Participant Role</label>
+              <select class="ui selection dropdown" v-model="participant.role" :name="'Participant ' + (index+1) + ' Role'" v-validate="'required'">
+                <option disabled value="">Please Choose One</option>
+                <option>Specialist</option>
+                <option>Consumer</option>
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div v-if="errors.any()" class="ui message red">
+        <ul>
+          <li v-for="(error, index) in errors.errors">
+            {{ error.msg }}
+          </li>
+        </ul>
+      </div>
+      <button class="ui basic button" v-on:click="addParticipant">
+        <i class="icon user"></i>
+        Add Participant
+      </button>
+      <button type="button" v-on:click="create" class="ui secondary button">Create Appointment</button>
+
+    </form>
+    <div v-if="isFormSubmitted()" class="ui icon message green">
+      <i class="checked calendar icon"></i>
+      <div class="content">
+        <div class="header">Appointment Ready!</div>
+        <p>Thank you for your booking.</p>
+      </div>
+    </div>
+    <div v-else-if="isFormError()" class="ui message red">
+      <h4>Error: </h4> {{ errorMessage }}
+    </div>
+  </div>
+
+
+  <div class="ui modal">
+    <div class="header">About this App</div>
+    <div class="content">
+      <p>A super awesome specialist video conference solution</p>
+      <p>Brought to you by the EMEA SE Team!</p>
+
+    </div>
+    <div class="actions">
+      <div class="ui cancel button">
+        <i class="close icon"></i>Close</div>
+    </div>
+  </div>
+
+
+
+  <script src="https://unpkg.com/vue"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></script>
+  <script src="https://unpkg.com/vee-validate@2.0.0-rc.7/dist/vee-validate.js"></script>
+  <script>
+    Vue.use(VeeValidate); // good to go.
+
+  </script>
+
+  <script src="index.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "Meeting",
+  "plural": "Meetings",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "roomId": {
+      "type": "string",
+      "id": true
+    },
+    "recordSession": {
+      "type": "boolean"
+    },
+    "date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "participants": {
+      "type": "hasMany",
+      "model": "Participant",
+      "foreignKey": "roomId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
