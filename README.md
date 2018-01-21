@@ -10,6 +10,13 @@ NOTE: Please review the code if you do not use it just as demo. It has been desi
 - Before the participants join the room the phone number is verified with Twilio Phone Verification
 - After the participants have been successfully verified the video connection is established
 
+## One Click Install - Heroku
+
+This will install the application and all the dependencies on Heroku (login required) for you. As part of the installation, the Heroku app will walk you through configuration of environment variables.  Please click on the following button to deploy the application.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nash-md/twilio-video-specialist-on-demand)
+
+
 ## Manual Install - On Your Own Server or Machine
 
 This project requires [Node.js](http://nodejs.org/) 6 or greater.
