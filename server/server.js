@@ -7,8 +7,9 @@ const boot = require('loopback-boot');
 const app = (module.exports = loopback());
 
 app.start = function() {
-  // start the web server
-  return app.listen(function() {
+  const port = process.env.PORT || 8000;
+  
+  return app.listen(port, function() {
     app.emit('started');
 
     const baseUrl = app.get('url').replace(/\/$/, '');
