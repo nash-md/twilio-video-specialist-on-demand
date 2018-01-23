@@ -36,13 +36,13 @@ In order to run the demo you will need to set the following environment variable
 - `ACCOUNT_SID`
 - `API_KEY_SID`
 - `API_KEY_SECRET`
-- `TWILIO_NUMBER`, a Twilio number we send the invitation SMS from
+- `TWILIO_NUMBER`, a Twilio number or Messaging Service we send the invitation SMS from
 
 * For Account SID and API Key/Secret please click here:  https://www.twilio.com/console
 * Buy a phone number or use an existing one (the application will configure the number for you later
-* Create a Twilio Verify Service here: https://www.twilio.com/console/verify/applications
+* Create a Twilio Authy Application here: https://www.twilio.com/console/authy/applications
 
-- `ACCOUNT_SECURITY_API_KEY` The Twilio Verify Service SID
+- `ACCOUNT_SECURITY_API_KEY` The Twilio Authy Production API Key
 - `BASE_URL` The url to your application
 
 Start the application
