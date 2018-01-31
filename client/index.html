@@ -58,11 +58,29 @@
 
             </div>
             <div class="field" :class="{ 'error': errors.has('Participant ' + (index+1) + ' Number')}">
+              <label>Participant Country</label>
+
+              <select class="ui selection dropdown" v-model="participant.countryCode" :name="'Participant ' + (index+1) + ' Country'" v-validate="'required'">
+                <option disabled value="">Please Choose One</option>
+                <option value="1">United States</option>
+                <option value="33">France</option>
+                <option value="44">United Kingdom</option>
+                <option value="49">Germany</option>
+              </select>
+
+            </div>
+
+            <div class="field" :class="{ 'error': errors.has('Participant ' + (index+1) + ' Number')}">
               <label>Participant Number</label>
+
               <input minlength="10" maxlength="15" type="text" class="form-control" placeholder="+44747747747747" v-model="participant.phoneNumber"
                 :name="'Participant ' + (index+1) + ' Number'" v-validate="{ required: true, regex: /^[\\+][1-9][0-9]{1,14}$/ }">
 
             </div>
+
+          </div>
+
+          <div class="equal width fields">
 
             <div class="field" :class="{ 'error': errors.has('Participant ' + (index+1) + ' Role')}">
               <label>Participant Role</label>

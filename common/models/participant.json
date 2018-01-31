@@ -30,12 +30,13 @@
       "type": "string",
       "required": true
     },
+    "countryCode": {
+      "type": "string",
+      "required": true
+    },
     "role": {
       "type": "string",
       "default": "G"
-    },
-    "textRecordingLink": {
-      "type": "boolean"
     },
     "accessCode": {
       "type": "string"

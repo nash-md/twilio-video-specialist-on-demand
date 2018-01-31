@@ -3,7 +3,6 @@ var crypto = require('crypto');
 var app = require('../../server/server');
 var loopback = require('loopback');
 
-
 const Participant = app.models.Participant;
 const Meeting = app.models.Meeting;
 
