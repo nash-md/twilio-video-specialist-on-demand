@@ -1,9 +1,6 @@
 'use strict';
-const AuthyClient = require('authy-client').Client;
-const authyClient = new AuthyClient({
-  key: process.env.ACCOUNT_SECURITY_API_KEY,
-});
-const enums = require('authy-client').enums;
+
+const authy = require('authy')(process.env.ACCOUNT_SECURITY_API_KEY);
 
 const client = require('twilio')(
   process.env.API_KEY_SID,
@@ -55,14 +52,10 @@ module.exports = function(Participant) {
 
     Participant.findOne(query, function(err, participant) {
       if (participant) {
-        authyClient.startPhoneVerification(
-          {
-            countryCode: '44',
-            locale: 'en',
-            phone: participant.phoneNumber,
-            via: enums.verificationVia.SMS,
-          },
-          function(err, res) {
+
+        authy.phones()
+          .verification_start(participant.phoneNumber, participant.countryCode, { via: 'sms'}, function(err, res) {
+
             if (err) {
               console.log(err);
               return cb(err);
@@ -70,8 +63,8 @@ module.exports = function(Participant) {
               console.log('Phone information', res);
               cb(null);
             }
-          }
-        );
+            
+        });
       }
     });
   };
@@ -94,14 +87,10 @@ module.exports = function(Participant) {
 
         return cb(error);
       } else {
-        authyClient.verifyPhone(
-          {
-            countryCode: '44',
-            phone: participant.phoneNumber,
-            token: body.otp,
-          },
-          function(err, res) {
-            console.log('wrong code');
+
+        authy.phones()
+          .verification_check(participant.phoneNumber, participant.countryCode, body.otp, function(err, res) {
+
             if (err) {
               const error = new Error('invalid code');
               error.status = 403;
@@ -110,8 +99,8 @@ module.exports = function(Participant) {
             } else {
               return cb(null);
             }
-          }
-        );
+            
+        });
       }
     });
   };
